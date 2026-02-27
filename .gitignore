@@ -1,5 +1,5 @@
 # Build files for the computer games
-build/
+oldSoftware/build/
 
 # settings for frimware
 firmwar/bin
