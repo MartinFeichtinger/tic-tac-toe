@@ -17,12 +17,64 @@ MCU = attiny461a
 FORMAT = ihex
 #FORMAT = binary
 
+# removed original target and source selection
+###################################################################################
 # Target file name (without extension).
-TARGET = ./src/main
-
+#TARGET = ./src/main
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c 
+#SRC = $(TARGET).c 
+###################################################################################
+
+# improved target, source, build and bin destination settings (got support from gemini)
+###################################################################################
+# Target and Path Definitions
+TARGET_NAME = tic-tac-toe
+BIN_DIR = bin
+BUILD_DIR = build
+SRC_DIR = src
+
+# Create directories if they don't exist
+$(BIN_DIR) $(BUILD_DIR):
+	mkdir -p $@
+
+# Automatically find all .c files in src and its subdirectories
+SRC = $(shell find $(SRC_DIR) -name '*.c')
+
+# Define object files in the build directory, preserving folder structure
+OBJ = $(SRC:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+
+# Final binary paths
+TARGET_ELF = $(BIN_DIR)/$(TARGET_NAME).elf
+TARGET_HEX = $(BIN_DIR)/$(TARGET_NAME).hex
+
+# Include Paths
+EXTRAINCDIRS = $(SRC_DIR)/app $(SRC_DIR)/driver $(SRC_DIR)/hal $(SRC_DIR)
+
+# Updated Build Rules
+all: $(BIN_DIR) $(BUILD_DIR) $(TARGET_HEX)
+
+# Link: create ELF output file from object files
+$(TARGET_ELF): $(OBJ)
+	@echo "Linking: $@"
+	$(CC) $(ALL_CFLAGS) $^ --output $@ $(LDFLAGS)
+
+# Create Hex from ELF
+$(TARGET_HEX): $(TARGET_ELF)
+	@echo "Creating Hex: $@"
+	$(OBJCOPY) -O $(FORMAT) -R .eeprom $< $@
+
+# Compile: create object files from C source files
+# This rule creates subdirectories in build/ to match src/
+$(BUILD_DIR)/%.o : $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@echo "Compiling: $<"
+	$(CC) -c $(ALL_CFLAGS) $< -o $@
+
+clean:
+	@echo "Cleaning project..."
+	rm -rf $(BIN_DIR) $(BUILD_DIR)
+###################################################################################
 
 
 # List Assembler source files here.
