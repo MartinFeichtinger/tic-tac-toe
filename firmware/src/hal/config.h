@@ -7,12 +7,12 @@
 // pinout
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // digital output pins
-#define LED_ROW0_GREEN	    0, A    //PA0
-#define LED_ROW1_GREEN	    2, A    //PA2
-#define LED_ROW2_GREEN	    4, A    //PA4
-#define LED_ROW0_RED	    1, A    //PA1
-#define LED_ROW1_RED	    3, A    //PA3
-#define LED_ROW2_RED	    5, A    //PA5
+#define LED_ROW0_RED	    0, A    //PA0
+#define LED_ROW1_RED	    2, A    //PA2
+#define LED_ROW2_RED	    4, A    //PA4
+#define LED_ROW0_GREEN	    1, A    //PA1
+#define LED_ROW1_GREEN	    3, A    //PA3
+#define LED_ROW2_GREEN	    5, A    //PA5
 #define LED_COL0		    4, B    //PB4
 #define LED_COL1		    5, B    //PB5
 #define LED_COL2		    6, B    //PB6
