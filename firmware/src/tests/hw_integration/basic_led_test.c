@@ -1,6 +1,9 @@
 /*
 This is a test program for the led display. It should test the fuctionality of each led on the display.
 Therfore it set on led afer another to red and then green to detect hardware errors and errors in the config.h
+
+!! Warning !!
+Do not switch on two different rows and colors at once. The scematic isn't concepted for this. Therfore we need some mutiplexing later...
 */
 
 #include "config.h"
