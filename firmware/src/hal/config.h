@@ -1,8 +1,11 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-// µControler specs: ATtiny461A, Flash=4kB, RAM=256Bytes, CPU=20MHz
+// µControler specs: ATtiny461A, Flash=4kB, RAM=256Bytes
+#define F_CPU 1000000UL  // 1 MHz (8MHz clock with a 8x prescaler)
 
+// pinout
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // digital output pins
 #define ROW0_GREEN	    0, A    //PA0
 #define ROW1_GREEN	    2, A    //PA2
@@ -18,5 +21,6 @@
 // analog input pins
 #define PLAY_BUTTONS	6, A	//PA6	// two buttons at one pin
 #define MODE_SWITCHES   7, A	//PA7	// two switches at one pin
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #endif
