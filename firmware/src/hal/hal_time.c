@@ -1,4 +1,5 @@
 #include "hal_time.h"
+#include <avr/interrupt.h>
 #include <stddef.h>
 
 
