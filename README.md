@@ -8,9 +8,15 @@ Recendly, I attempted to update a small section of the code but quickly realized
 Motivated to improve my coding practices, I decided to refactor the project and reorganize it into a cleaner, more maintainable structure, ultimately enhancing both my coding skills and the quality of the project.
 
 ## The schematic
+<img width="2203" height="1522" alt="image" src="https://github.com/user-attachments/assets/452bb527-621b-4b47-9829-1896921ef099" />
+
+### 3D-Model
+![photo_2022-09-12_21-28-33](https://github.com/user-attachments/assets/1e5697ac-6481-49cc-99cc-46d038399a68)
 
 ### ATtiny461A
 
-### Multiplexing
+### LED display multiplexing
 
-## Software Structure
+### Timing problem
+
+## Software structure
