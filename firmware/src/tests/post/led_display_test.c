@@ -1,15 +1,16 @@
 #include "driver_led_display.h"
 #include "hal_time.h"
 
+void system_ticks_callback_handler(void);
 void clear_game_board(led_state_t game_board[3][3]);
 
 int main(void)
 {
 	TIMER_init_timer_0();
 	LED_DISPLAY_init();
+	TIME_set_system_ticks_callback(system_ticks_callback_handler);
 	led_state_t game_board[3][3];
 	clear_game_board(game_board);
-
 
 	// turn all leds green
 	for(uint8_t row=0; row<3; row++)
@@ -42,6 +43,13 @@ int main(void)
 		}
 	}
 }
+
+
+void system_ticks_callback_handler(void)
+{
+	LED_DISPLAY_system_tick();
+}
+
 
 void clear_game_board(led_state_t game_board[3][3])
 {

@@ -9,7 +9,7 @@ static led_state_t output_buffer[3][6]; // [x][y] => [col][row], row=0: ROW0_GRE
 static uint8_t active_row=0;			// for the output buffer => range = 0-5
 
 
-static void system_ticks_callback_handler(void)
+void LED_DISPLAY_system_tick(void)
 {
 	// deactived cols
 	GPIO_SET_LOW(LED_COL0);
@@ -77,8 +77,6 @@ void LED_DISPLAY_init(void)
     GPIO_SET_LOW(LED_COL0);
     GPIO_SET_LOW(LED_COL1);
     GPIO_SET_LOW(LED_COL2);
-	
-	TIME_set_system_ticks_callback(system_ticks_callback_handler);
 }
 
 

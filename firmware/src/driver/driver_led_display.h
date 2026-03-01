@@ -10,5 +10,6 @@ typedef enum
 
 void LED_DISPLAY_init(void);
 void LED_DISPLAY_update_buffer(led_state_t led_display_buffer[3][3]);
+void LED_DISPLAY_system_tick(void);
 
 #endif
