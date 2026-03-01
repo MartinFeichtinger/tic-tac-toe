@@ -2,7 +2,9 @@
 #define CONFIG_H
 
 // µControler specs: ATtiny461A, Flash=4kB, RAM=256Bytes
-#define F_CPU 1000000UL  // 1 MHz (8MHz clock with a 8x prescaler)
+#define F_CPU 8000000UL  // 8 MHz (8MHz clock with no prescaling) fuse need to be ajusted (from factory the prescaling is x8)
+// fuse setting for no prescaling: avrdude -c stk500v2 -P /dev/ttyACM0 -p t461 -U lfuse:w:0xe2:m
+// fuse setting for x8 prescaling: avrdude -c stk500v2 -P /dev/ttyACM0 -p t461 -U lfuse:w:0x62:m
 
 // pinout
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
