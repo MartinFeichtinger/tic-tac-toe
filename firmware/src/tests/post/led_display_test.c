@@ -1,6 +1,5 @@
 #include "driver_led_display.h"
 #include "hal_time.h"
-#include "config.h"
 
 void clear_game_board(led_state_t game_board[3][3]);
 

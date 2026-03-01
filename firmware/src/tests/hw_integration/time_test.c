@@ -1,7 +1,6 @@
+//#include <util/delay.h>
 #include "hal_time.h"
 #include "hal_gpio.h"
-//#include <util/delay.h>
-
 
 int main(void)
 {
