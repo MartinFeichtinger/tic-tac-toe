@@ -12,28 +12,36 @@ int main(void)
 	led_state_t game_board[3][3];
 	clear_game_board(game_board);
 
-	while(1)
+
+	// turn all leds green
+	for(uint8_t row=0; row<3; row++)
 	{
-		// coole animation in green
-		for(uint8_t row=0; row<3; row++)
+		for(uint8_t col=0; col<3; col++)
 		{
-			for(uint8_t col=0; col<3; col++)
-			{
-				game_board[col][row]=LED_ON_GREEN;
-				LED_DISPLAY_update_buffer(game_board);
-				_delay_ms(1000);
-			}
+			game_board[col][row]=LED_ON_GREEN;
+			LED_DISPLAY_update_buffer(game_board);
+			_delay_ms(300);
 		}
-		// cool animation in red
-		for(uint8_t row=0; row<3; row++)
+	}
+	// turn all leds red
+	for(uint8_t row=0; row<3; row++)
+	{
+		for(uint8_t col=0; col<3; col++)
 		{
-			for(uint8_t col=0; col<3; col++)
-			{
-				game_board[col][row]=LED_ON_RED;
-				LED_DISPLAY_update_buffer(game_board);
-				_delay_ms(1000);
-			}
-		}	
+			game_board[col][row]=LED_ON_RED;
+			LED_DISPLAY_update_buffer(game_board);
+			_delay_ms(300);
+		}
+	}
+	// turn all leds off
+	for(uint8_t row=0; row<3; row++)
+	{
+		for(uint8_t col=0; col<3; col++)
+		{
+			game_board[col][row]=LED_OFF;
+			LED_DISPLAY_update_buffer(game_board);
+			_delay_ms(300);
+		}
 	}
 }
 
