@@ -2,9 +2,56 @@
 #include "hal_gpio.h"
 #include "hal_time.h"
 
-
 static led_state_t output_buffer[3][6]; // [x][y] => [col][row], row=0: ROW0_GREEN, row=1: ROW0_RED, row=2: ROW1_GREEN, ...
-static uint8_t active_row=0;		// for the output buffer => range = 0-5
+static uint8_t active_row=0;			// for the output buffer => range = 0-5
+
+
+static void system_ticks_callback_handler(void)
+{
+	// deactived cols
+	GPIO_SET_LOW(LED_COL0);
+	GPIO_SET_LOW(LED_COL1);
+	GPIO_SET_LOW(LED_COL2);
+
+	// deactived previous row and actived active row
+	switch(active_row)
+	{
+		case 0:
+			GPIO_SET_LOW(LED_ROW2_RED);
+			GPIO_SET_HIGH(LED_ROW0_GREEN);
+			break;
+		case 1:
+			GPIO_SET_LOW(LED_ROW0_GREEN);
+			GPIO_SET_HIGH(LED_ROW0_RED);
+			break;
+		case 2:
+			GPIO_SET_LOW(LED_ROW0_RED);
+			GPIO_SET_HIGH(LED_ROW1_GREEN);
+			break;
+		case 3:
+			GPIO_SET_LOW(LED_ROW1_GREEN);
+			GPIO_SET_HIGH(LED_ROW1_RED);
+			break;
+		case 4:
+			GPIO_SET_LOW(LED_ROW1_RED);
+			GPIO_SET_HIGH(LED_ROW2_GREEN);
+			break;
+		case 5:
+			GPIO_SET_LOW(LED_ROW2_GREEN);
+			GPIO_SET_HIGH(LED_ROW2_RED);
+			break;
+	}
+
+	// activated active cols
+	if(output_buffer[0][active_row] == 1) GPIO_SET_HIGH(LED_COL0);
+	if(output_buffer[1][active_row] == 1) GPIO_SET_HIGH(LED_COL1);
+	if(output_buffer[2][active_row] == 1) GPIO_SET_HIGH(LED_COL2);
+
+	// update active ouput row
+	if(active_row >= 5) active_row = 0;
+	else active_row++;
+}
+
 
 void LED_DISPLAY_init(void)
 {
@@ -54,51 +101,4 @@ void LED_DISPLAY_update_buffer(led_state_t led_display_buffer[3][3])
 			
 		}
 	}
-}
-
-
-static void system_ticks_callback_handler(void)
-{
-	// deactived cols
-	GPIO_SET_LOW(LED_COL0);
-	GPIO_SET_LOW(LED_COL1);
-	GPIO_SET_LOW(LED_COL2);
-
-	// deactived previous row and actived active row
-	switch(active_row)
-	{
-		case 0:
-			GPIO_SET_LOW(LED_ROW2_RED);
-			GPIO_SET_HIGH(LED_ROW0_GREEN);
-			break;
-		case 1:
-			GPIO_SET_LOW(LED_ROW0_GREEN);
-			GPIO_SET_HIGH(LED_ROW0_RED);
-			break;
-		case 2:
-			GPIO_SET_LOW(LED_ROW0_RED);
-			GPIO_SET_HIGH(LED_ROW1_GREEN);
-			break;
-		case 3:
-			GPIO_SET_LOW(LED_ROW1_GREEN);
-			GPIO_SET_HIGH(LED_ROW1_RED);
-			break;
-		case 4:
-			GPIO_SET_LOW(LED_ROW1_RED);
-			GPIO_SET_HIGH(LED_ROW2_GREEN);
-			break;
-		case 5:
-			GPIO_SET_LOW(LED_ROW2_GREEN);
-			GPIO_SET_HIGH(LED_ROW2_RED);
-			break;
-	}
-
-	// activated active cols
-	if(output_buffer[0][active_row] == 1) GPIO_SET_HIGH(LED_COL0);
-	if(output_buffer[1][active_row] == 1) GPIO_SET_HIGH(LED_COL1);
-	if(output_buffer[2][active_row] == 1) GPIO_SET_HIGH(LED_COL2);
-
-	// update active ouput row
-	if(active_row >= 5) active_row = 0;
-	else active_row++;
 }
