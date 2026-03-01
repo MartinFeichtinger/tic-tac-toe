@@ -1,7 +1,6 @@
 #include "driver_led_display.h"
 #include "hal_time.h"
 #include "config.h"
-#include <util/delay.h>
 
 void clear_game_board(led_state_t game_board[3][3]);
 
@@ -20,7 +19,7 @@ int main(void)
 		{
 			game_board[col][row]=LED_ON_GREEN;
 			LED_DISPLAY_update_buffer(game_board);
-			_delay_ms(300);
+			TIME_delay_ms(300);
 		}
 	}
 	// turn all leds red
@@ -30,7 +29,7 @@ int main(void)
 		{
 			game_board[col][row]=LED_ON_RED;
 			LED_DISPLAY_update_buffer(game_board);
-			_delay_ms(300);
+			TIME_delay_ms(300);
 		}
 	}
 	// turn all leds off
@@ -40,7 +39,7 @@ int main(void)
 		{
 			game_board[col][row]=LED_OFF;
 			LED_DISPLAY_update_buffer(game_board);
-			_delay_ms(300);
+			TIME_delay_ms(300);
 		}
 	}
 }
