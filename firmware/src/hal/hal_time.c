@@ -13,6 +13,12 @@ uint32_t TIME_get_millis()
 	return return_value;
 }
 
+void TIME_delay_ms(uint16_t delay_ms)
+{
+	uint32_t start_time=TIME_get_millis();
+	while(((uint16_t)TIME_get_millis() - start_time < delay_ms));
+}
+
 
 static TIME_system_ticks_callback_t system_ticks_callback = NULL; 
 
