@@ -1,4 +1,6 @@
 #include "hal_adc.h"
+#include <avr/io.h>
+#include <stdint.h>
 #include "config.h"
 
 void ADC_init(void)

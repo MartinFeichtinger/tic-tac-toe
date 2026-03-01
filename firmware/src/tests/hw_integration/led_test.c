@@ -5,11 +5,10 @@ Therfore it set on led afer another to red and then green to detect hardware err
 !! Warning !!
 Do not switch on two different rows and colors at once. The scematic isn't concepted for this. Therfore we need some mutiplexing later...
 */
-
-#include "config.h"
-#include "hal_gpio.h"
 #include <util/delay.h>
 #include <stdint.h>
+#include "config.h"
+#include "hal_gpio.h"
 
 #define GREEN   0
 #define RED     1

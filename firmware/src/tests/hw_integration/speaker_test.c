@@ -3,9 +3,9 @@ This is a short test program for the speaker. It toggles the speaker pin every t
 500Hz => T=2ms => T_ON = T_OFF = 1ms
 */
 
+#include <util/delay.h>
 #include "config.h"
 #include "hal_gpio.h"
-#include <util/delay.h>
 
 int main(void)
 {

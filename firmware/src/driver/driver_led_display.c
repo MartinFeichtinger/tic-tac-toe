@@ -1,6 +1,9 @@
 #include "driver_led_display.h"
+#include <stdint.h>
+#include "config.h"
 #include "hal_gpio.h"
 #include "hal_time.h"
+
 
 static led_state_t output_buffer[3][6]; // [x][y] => [col][row], row=0: ROW0_GREEN, row=1: ROW0_RED, row=2: ROW1_GREEN, ...
 static uint8_t active_row=0;			// for the output buffer => range = 0-5

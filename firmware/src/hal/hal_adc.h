@@ -1,7 +1,6 @@
 #ifndef HAL_ADC_H
 #define HAL_ADC_H
 
-#include <avr/io.h>
 #include <stdint.h>
 
 void ADC_init(void);

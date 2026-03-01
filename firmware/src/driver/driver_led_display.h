@@ -1,8 +1,6 @@
 #ifndef DRIVER_LED_DISPLAY_H
 #define DRIVER_LED_DISPLAY_H
 
-#include <stdint.h>
-
 typedef enum
 {
 	LED_OFF = 0,
