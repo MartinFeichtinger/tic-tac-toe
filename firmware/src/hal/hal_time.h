@@ -4,6 +4,7 @@
 #include "hal_timer.h"
 #include <stdint.h>
 
+void TIME_init(void);
 uint32_t TIME_get_millis(void);
 void TIME_delay_ms(uint16_t ms);
 
