@@ -1,4 +1,6 @@
 #include "driver_led_display.h"
+#include <stdint.h>
+#include "hal_timer.h"
 #include "hal_time.h"
 
 void system_ticks_callback_handler(void);
