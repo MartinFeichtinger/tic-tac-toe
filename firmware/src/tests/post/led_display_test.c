@@ -1,6 +1,5 @@
 #include "driver_led_display.h"
 #include <stdint.h>
-#include "hal_timer.h"
 #include "hal_time.h"
 
 void system_ticks_callback_handler(void);
@@ -8,9 +7,10 @@ void clear_game_board(led_state_t game_board[3][3]);
 
 int main(void)
 {
-	TIMER_init_timer_0();
 	LED_DISPLAY_init();
+	TIME_init();
 	TIME_set_system_ticks_callback(system_ticks_callback_handler);
+	
 	led_state_t game_board[3][3];
 	clear_game_board(game_board);
 

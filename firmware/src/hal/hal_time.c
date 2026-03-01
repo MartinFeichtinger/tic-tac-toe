@@ -1,9 +1,16 @@
 #include "hal_time.h"
 #include <avr/interrupt.h>
 #include <stddef.h>
-
+#include "hal_timer.h"
 
 static volatile uint32_t system_millis=0;
+
+
+void TIME_init(void)
+{
+	TIMER_init_timer_0();
+}
+
 
 uint32_t TIME_get_millis()
 {
@@ -13,6 +20,7 @@ uint32_t TIME_get_millis()
 	sei();
 	return return_value;
 }
+
 
 void TIME_delay_ms(uint16_t delay_ms)
 {
