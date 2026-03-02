@@ -6,7 +6,7 @@
 void TIMER_init_timer_0(void)
 {
 	// OCR0A = F_CPU / (prescaler * F_TARGET) - 1
-	// OCR0A = 1MHz / (8 * 1kHz) - 1 = 124
+	// OCR0A = 8MHz / (64 * 1kHz) - 1 = 124
 
 	cli();				// deactivate interrupts
 
