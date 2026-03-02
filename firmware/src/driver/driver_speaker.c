@@ -14,9 +14,9 @@ void SPEAKER_init(void)
 }
 
 
-void SPEAKER_play_sound(musical_note_t note, uint16_t duration_ms)
+void SPEAKER_play_sound(uint16_t frequncy, uint16_t duration_ms)
 {
-	TIMER_set_timer_1_frequency(note);
+	TIMER_set_timer_1_frequency(frequncy);
 	duration_ms_countdown = duration_ms;
 }
 
