@@ -55,7 +55,7 @@ TARGET_HEX = $(BIN_DIR)/$(TARGET_NAME).hex
 
 all: $(BIN_DIR) $(BUILD_DIR) $(TARGET_HEX)
 	@echo "Build finished: $(TARGET_HEX)"
-	@$(SIZE) --mcu=$(MCU) -C $(TARGET_ELF)
+	@$(SIZE) --mcu=$(MCU) --format=avr $(TARGET_ELF)
 
 $(TARGET_HEX): $(TARGET_ELF)
 	@echo "Creating Hex: $@"
