@@ -1,0 +1,34 @@
+#include "hal_time.h"
+
+#include "driver_led_display.h"
+#include "driver_speaker.h"
+#include "driver_music.h"
+
+#include <stdint.h>
+
+void system_ticks_callback_handler(void);
+
+int main(void)
+{
+	// many driver inits
+	TIME_init();
+	TIME_set_system_ticks_callback(system_ticks_callback_handler);
+	LED_DISPLAY_init();
+	SPEAKER_init();
+
+	// run post animation
+
+
+	// run game application
+
+
+	while(1);
+}
+
+
+void system_ticks_callback_handler(void)
+{
+	LED_DISPLAY_system_tick();
+	SPEAKER_system_tick();
+    MUSIC_system_tick();
+}
