@@ -4,13 +4,13 @@
 #include <stdint.h>
 
 /*
-This is a driver to use the speaker like an musician 
-you can define an melody and let it play in the background
+Driver for controlling the speaker like a musical instrument.
+You can define a melody and play it in the background.
 */
 
 typedef enum {
-    NOTE_PAUSE = 0,
-    // Oktave 4
+    NOTE_PAUSE = 0, 
+    // Octave 4
     NOTE_C4  = 262,
     NOTE_CS4 = 277,
     NOTE_D4  = 294,
@@ -23,7 +23,7 @@ typedef enum {
     NOTE_A4  = 440,
     NOTE_AS4 = 466,
     NOTE_B4  = 494,
-    // Oktave 5
+    // Octave 5
     NOTE_C5  = 523,
     NOTE_CS5 = 554,
     NOTE_D5  = 587,
@@ -35,26 +35,28 @@ typedef enum {
     NOTE_GS5 = 831,
     NOTE_A5  = 880,
     NOTE_AS5 = 932,
-    NOTE_B5  = 988,
-    // end of melody marker 
-    END_OF_MELODY = 0
-} musical_note_t;
+    NOTE_B5  = 988
+} note_pitch_t;
 
 typedef enum{
-	LEN_WHOLE=16,	// 1/1
-	LEN_HALF=8,		// 1/2
-	LEN_QUARTER=4,	// 1/4
-	LEN_EIGHTH=2,	// 1/8
-	LEN_SIXTEENTH=1	// 1/16
-} note_length_t;
+	WHOLE=16,	// 1/1
+	HALF=8,		// 1/2
+	QUARTER=4,	// 1/4
+	EIGHTH=2,	// 1/8
+	SIXTEENTH=1,// 1/16
+    // end of melody marker
+    END_OF_MELODY = 0
+} note_value_t;
 
 typedef struct {
-	musical_note_t note;
-	note_length_t duration;
+	note_pitch_t pitch;
+	note_value_t value;
 } note_t;
 
-void MUSIC_set_bpm(uint8_t music_bpm);    // if this function isn't called, the default bpm value is 120
+void MUSIC_set_bpm(uint8_t bpm);    // Default BPM is 120 if this function is not called.
+void MUSIC_play_note(note_pitch_t pitch, note_value_t note_value);
 void MUSIC_play_melody(const note_t* melody);
+void MUSIC_stop_melody(void);
 void MUSIC_system_tick(void);
 uint8_t MUSIC_is_playing(void);
 
