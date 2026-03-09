@@ -41,7 +41,7 @@ typedef enum {
 typedef enum{
 	WHOLE=16,	// 1/1
 	HALF=8,		// 1/2
-	QUARTER=4,	// 1/4
+    QUARTER=4,	// 1/4
 	EIGHTH=2,	// 1/8
 	SIXTEENTH=1,// 1/16
     // end of melody marker
