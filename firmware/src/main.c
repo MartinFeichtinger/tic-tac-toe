@@ -4,6 +4,8 @@
 #include "driver_speaker.h"
 #include "driver_music.h"
 
+#include "app_post.h"
+
 #include <stdint.h>
 
 void system_ticks_callback_handler(void);
@@ -17,7 +19,7 @@ int main(void)
 	SPEAKER_init();
 
 	// run post animation
-
+	post_animation();
 
 	// run game application
 
