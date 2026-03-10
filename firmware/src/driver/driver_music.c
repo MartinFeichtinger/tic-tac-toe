@@ -15,7 +15,7 @@ void MUSIC_set_bpm(uint8_t bpm)
 }
 
 
-static uint16_t note_value_to_ms(note_value_t value)
+uint16_t MUSIC_note_value_to_ms(note_value_t value)
 {
 	// 1min = 60000ms
 	// 1bpm => on 1/4 per minute for a 4/4 rhythm
@@ -29,7 +29,7 @@ static uint16_t note_value_to_ms(note_value_t value)
 
 void MUSIC_play_note(note_pitch_t pitch, note_value_t value)
 {
-	uint16_t ms=note_value_to_ms(value);
+	uint16_t ms=MUSIC_note_value_to_ms(value);
 
 	SPEAKER_play_sound(pitch, ms-20);
 

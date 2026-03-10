@@ -35,7 +35,9 @@ typedef enum {
     NOTE_GS5 = 831,
     NOTE_A5  = 880,
     NOTE_AS5 = 932,
-    NOTE_B5  = 988
+    NOTE_B5  = 988,
+    // Octave 6
+    NOTE_C6 = 1047
 } note_pitch_t;
 
 typedef enum{
@@ -53,11 +55,16 @@ typedef struct {
 	note_value_t value;
 } note_t;
 
+
 void MUSIC_set_bpm(uint8_t bpm);    // Default BPM is 120 if this function is not called.
+uint16_t MUSIC_note_value_to_ms(note_value_t value);
+
 void MUSIC_play_note(note_pitch_t pitch, note_value_t note_value);
 void MUSIC_play_melody(const note_t* melody);
 void MUSIC_stop_melody(void);
-void MUSIC_system_tick(void);
+
 uint8_t MUSIC_is_playing(void);
+
+void MUSIC_system_tick(void);
 
 #endif
