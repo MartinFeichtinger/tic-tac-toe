@@ -1,5 +1,6 @@
 #include "driver_led_display.h"
 #include <stdint.h>
+#include <avr/interrupt.h>
 #include "config.h"
 #include "hal_gpio.h"
 #include "hal_time.h"
@@ -35,6 +36,7 @@ void LED_DISPLAY_init(void)
 
 void LED_DISPLAY_update_buffer(led_state_t led_display_buffer[3][3])
 {
+	cli();
 	// led_display_buffer[x][y] => [col][row]
 	for(uint8_t row=0; row<3; row++)
 	{
@@ -55,6 +57,7 @@ void LED_DISPLAY_update_buffer(led_state_t led_display_buffer[3][3])
 			
 		}
 	}
+	sei();
 }
 
 
