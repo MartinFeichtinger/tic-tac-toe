@@ -4,7 +4,7 @@
 #include "driver_speaker.h"
 #include "driver_music.h"
 
-#include "app_post.h"
+#include "app_post_animation.h"
 
 #include <stdint.h>
 

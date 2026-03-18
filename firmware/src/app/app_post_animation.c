@@ -1,4 +1,4 @@
-#include "app_post.h"
+#include "app_post_animation.h"
 
 #include "hal_time.h"
 
