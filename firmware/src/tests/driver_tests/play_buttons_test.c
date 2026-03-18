@@ -14,8 +14,8 @@ led_state_t game_board[3][3];
 
 
 void system_ticks_callback_handler(void);
-void next_button_callback_handler(void);
-void ok_button_callback_handler(void);
+void next_button_callback_handler(button_press_type_t press_type);
+void ok_button_callback_handler(button_press_type_t press_type);
 
 static void clear_game_board(led_state_t game_board[3][3]);
 
@@ -48,38 +48,53 @@ void system_ticks_callback_handler(void)
 }
 
 
-void next_button_callback_handler(void)
+void next_button_callback_handler(button_press_type_t press_type)
 {
-	if(pos.x+1 < BOARD_SIZE)
+	if(press_type == LONG)
 	{
-		pos.x++;
+		pos.x=1;
+		pos.y=1;
 	}
-	else if(pos.y+1 < BOARD_SIZE)
+	else if(press_type == SHORT)
 	{
-		pos.y++;
-		pos.x=0;
-	}
-	else
-	{
-		pos.x=0;
-		pos.y=0;
+		if(pos.x+1 < BOARD_SIZE)
+		{
+			pos.x++;
+		}
+		else if(pos.y+1 < BOARD_SIZE)
+		{
+			pos.y++;
+			pos.x=0;
+		}
+		else
+		{
+			pos.x=0;
+			pos.y=0;
+		}
 	}
 }
 
 
-void ok_button_callback_handler(void)
+void ok_button_callback_handler(button_press_type_t press_type)
 {
-	if(game_board[pos.x][pos.y] == LED_OFF)
+	if(press_type == LONG)
 	{
-		game_board[pos.x][pos.y]=LED_ON_GREEN;
+		clear_game_board(game_board);
 	}
-	else if(game_board[pos.x][pos.y] == LED_ON_GREEN)
+	else if(press_type == SHORT)
 	{
-		game_board[pos.x][pos.y]=LED_ON_RED;
-	}
-	else // game_board[pos.x][pos.y] == LED_ON_RED
-	{
-		game_board[pos.x][pos.y]=LED_OFF;
+		if(game_board[pos.x][pos.y] == LED_OFF)
+		{
+			game_board[pos.x][pos.y]=LED_ON_GREEN;
+		}
+		else if(game_board[pos.x][pos.y] == LED_ON_GREEN)
+		{
+			game_board[pos.x][pos.y]=LED_ON_RED;
+		}
+		else // game_board[pos.x][pos.y] == LED_ON_RED
+		{
+			game_board[pos.x][pos.y]=LED_OFF;
+		}
 	}
 }
 

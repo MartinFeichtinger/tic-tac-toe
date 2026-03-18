@@ -72,9 +72,19 @@ void PLAY_BUTTONS_system_tick(void)
 	}
 	else // next_button is released
 	{
-		if(next_button_ticks_counter >= DEBOUNCE_TICKS)
+		if(next_button_callback != NULL)
 		{
-			if(next_button_callback != NULL) next_button_callback();
+			if(next_button_ticks_counter >= DEBOUNCE_TICKS)
+			{
+				if(next_button_ticks_counter >= LONG_PRESS_TICKS)
+				{
+					next_button_callback(LONG);
+				}
+				else
+				{
+					next_button_callback(SHORT);
+				}	
+			}
 		}
 
 		next_button_ticks_counter=0;
@@ -86,9 +96,19 @@ void PLAY_BUTTONS_system_tick(void)
 	}
 	else // ok_button is released
 	{
-		if(ok_button_ticks_counter >= DEBOUNCE_TICKS)
+		if(ok_button_callback != NULL)
 		{
-			if(ok_button_callback != NULL) ok_button_callback();
+			if(ok_button_ticks_counter >= DEBOUNCE_TICKS)
+			{
+				if(ok_button_ticks_counter >= LONG_PRESS_TICKS)
+				{
+					ok_button_callback(LONG);
+				}
+				else
+				{
+					ok_button_callback(SHORT);
+				}	
+			}
 		}
 
 		ok_button_ticks_counter=0;
