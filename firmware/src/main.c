@@ -7,6 +7,7 @@
 #include "driver_play_buttons.h"
 
 #include "app_post_animation.h"
+#include "app_game_logic.h"
 
 #include <stdint.h>
 
@@ -27,7 +28,7 @@ int main(void)
 	post_animation();
 
 	// run game application
-
+	GAME_LOGIC_run_game();
 
 	while(1);
 }
