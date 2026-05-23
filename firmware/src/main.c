@@ -25,6 +25,7 @@ int main(void)
 	// callback handler inits
 	TIME_set_system_ticks_callback(system_ticks_callback_handler);
 	PLAY_BUTTONS_set_next_button_callback(GAME_LOGIC_next_button_callback_handler);
+	PLAY_BUTTONS_set_ok_button_callback(GAME_LOGIC_ok_button_callback_handler);
 
 	// run post animation
 	post_animation();

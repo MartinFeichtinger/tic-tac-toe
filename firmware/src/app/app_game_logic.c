@@ -48,12 +48,15 @@ typedef struct
 static current_player_t current_player;
 static game_field_t game_board[BOARD_SIZE][BOARD_SIZE];
 static bool game_over=false;
+static uint8_t max_possible_moves = BOARD_SIZE*BOARD_SIZE;
+static uint8_t current_move = 0;
 
 
 // function prototypes
 static void clear_game_board(game_field_t game_board[BOARD_SIZE][BOARD_SIZE]);
 static void update_display(game_field_t game_board[BOARD_SIZE][BOARD_SIZE], current_player_t player, bool reset_blink_time);
 static position_t get_next_empty_field(game_field_t game_board[BOARD_SIZE][BOARD_SIZE], position_t pos); // pos = current_player.pos
+static player_t change_player(player_t player);
 
 
 void GAME_LOGIC_run_game(void)
@@ -81,6 +84,28 @@ void GAME_LOGIC_next_button_callback_handler(button_press_type_t press_type)
 		update_display(game_board, current_player, true);
 	}
 }
+
+void GAME_LOGIC_ok_button_callback_handler(button_press_type_t press_type)
+{
+	if(!game_over)
+	{
+		game_board[current_player.pos.x][current_player.pos.y].status = OCCUPIED;
+		game_board[current_player.pos.x][current_player.pos.y].owner = current_player.player;
+		if(current_move >= max_possible_moves - 1)
+		{
+			game_over=true;
+		}
+		else
+		{
+			current_player.pos = get_next_empty_field(game_board, current_player.pos);
+			current_player.player = change_player(current_player.player);
+		}
+
+		current_move++;
+		update_display(game_board, current_player, true);
+	}
+}
+
 
 
 static void clear_game_board(game_field_t game_board[3][3])
@@ -168,4 +193,11 @@ static position_t get_next_empty_field(game_field_t game_board[BOARD_SIZE][BOARD
 	} while (game_board[pos.x][pos.y].status == OCCUPIED);
 	
     return pos;
+}
+
+static player_t change_player(player_t player)
+{
+	if(player == PLAYER_1) return PLAYER_2;
+	if(player == PLAYER_2) return PLAYER_1;
+	else return NONE;
 }
