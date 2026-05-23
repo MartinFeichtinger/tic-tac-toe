@@ -1,7 +1,7 @@
 #ifndef DRIVER_PLAY_BUTTONS_H
 #define DRIVER_PLAY_BUTTONS_H
 
-#define DEBOUNCE_TICKS		10		// ms
+#define DEBOUNCE_TICKS		20		// ms
 #define LONG_PRESS_TICKS	1000	// ms
 
 typedef enum{
