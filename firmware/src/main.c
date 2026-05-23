@@ -17,12 +17,14 @@ int main(void)
 {
 	// many driver inits
 	TIME_init();
-	TIME_set_system_ticks_callback(system_ticks_callback_handler);
-
 	LED_DISPLAY_init();
 	SPEAKER_init();
 	MODE_SWITCHES_init();
 	PLAY_BUTTONS_init();
+
+	// callback handler inits
+	TIME_set_system_ticks_callback(system_ticks_callback_handler);
+	PLAY_BUTTONS_set_next_button_callback(GAME_LOGIC_next_button_callback_handler);
 
 	// run post animation
 	post_animation();

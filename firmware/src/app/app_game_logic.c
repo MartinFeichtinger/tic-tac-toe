@@ -44,14 +44,20 @@ typedef struct
 } game_field_t;
 
 
+// globale varibles in this file
+static current_player_t current_player;
+static game_field_t game_board[BOARD_SIZE][BOARD_SIZE];
+static bool game_over=false;
+
+
+// function prototypes
 static void clear_game_board(game_field_t game_board[BOARD_SIZE][BOARD_SIZE]);
-static void update_display(game_field_t game_board[BOARD_SIZE][BOARD_SIZE], current_player_t player);
+static void update_display(game_field_t game_board[BOARD_SIZE][BOARD_SIZE], current_player_t player, bool reset_blink_time);
+static position_t get_next_empty_field(game_field_t game_board[BOARD_SIZE][BOARD_SIZE], position_t pos); // pos = current_player.pos
+
 
 void GAME_LOGIC_run_game(void)
 {
-	bool game_over=false;
-	current_player_t current_player;
-	game_field_t game_board[BOARD_SIZE][BOARD_SIZE];
 
 	current_player.player=PLAYER_1;
 	current_player.pos.x=1;
@@ -63,7 +69,16 @@ void GAME_LOGIC_run_game(void)
 	{
 		TIME_delay_ms(100);		
 
-		update_display(game_board, current_player);
+		update_display(game_board, current_player, false);
+	}
+}
+
+void GAME_LOGIC_next_button_callback_handler(button_press_type_t press_type)
+{
+	if(!game_over)
+	{
+		current_player.pos = get_next_empty_field(game_board, current_player.pos);
+		update_display(game_board, current_player, true);
 	}
 }
 
@@ -81,15 +96,15 @@ static void clear_game_board(game_field_t game_board[3][3])
 }
 
 
-static void update_display(game_field_t game_board[BOARD_SIZE][BOARD_SIZE], current_player_t current_player)
+static void update_display(game_field_t game_board[BOARD_SIZE][BOARD_SIZE], current_player_t current_player, bool reset_blink_time)
 {
 	static uint32_t start_time=0;
 	bool blinking_leds_on=false;
 
-	if(start_time == 0) start_time=TIME_get_millis();
+	if(start_time == 0 || reset_blink_time) start_time=TIME_get_millis();
 	else
 	{
-		if((TIME_get_millis()-start_time) % 1000 > 500)
+		if((TIME_get_millis()-start_time) % 1000 < 500)
 		{
 			blinking_leds_on=true;
 		}
@@ -138,4 +153,19 @@ static void update_display(game_field_t game_board[BOARD_SIZE][BOARD_SIZE], curr
 	}
 
 	LED_DISPLAY_update_buffer(display_buffer);
+}
+
+static position_t get_next_empty_field(game_field_t game_board[BOARD_SIZE][BOARD_SIZE], position_t pos) {
+	do
+	{
+		if(pos.x < (BOARD_SIZE - 1)) pos.x ++;
+		else
+		{
+			pos.x = 0;
+			if(pos.y < (BOARD_SIZE - 1)) pos.y ++;
+			else pos.y = 0;
+		}
+	} while (game_board[pos.x][pos.y].status == OCCUPIED);
+	
+    return pos;
 }
